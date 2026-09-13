@@ -1,0 +1,895 @@
+{
+  "surface": "report",
+  "title": "分散持有历史上更常赚钱，随机单股一年则略偏亏损",
+  "generatedAt": "2026-09-12T15:47:42.809016+00:00",
+  "buildStatus": "complete",
+  "status": "reviewed",
+  "report": {
+    "asOf": "2026-09-04"
+  },
+  "filters": [],
+  "queries": {
+    "headline_metrics": {
+      "rows": [
+        {
+          "metric": "market_win_rate",
+          "label": "全市场组合一年胜率",
+          "value": 0.6148487261146497,
+          "unit": "ratio"
+        },
+        {
+          "metric": "random_stock_win_rate",
+          "label": "随机单股毛收益胜率",
+          "value": 0.49247456285890245,
+          "unit": "ratio"
+        },
+        {
+          "metric": "random_stock_net_win_rate",
+          "label": "随机100股扣费后胜率",
+          "value": 0.47783609965658,
+          "unit": "ratio"
+        },
+        {
+          "metric": "market_cagr",
+          "label": "全市场长期复合年化",
+          "value": 0.10041177416387392,
+          "unit": "ratio"
+        },
+        {
+          "metric": "random_stock_median",
+          "label": "随机单股一年中位收益",
+          "value": -0.005524861539296433,
+          "unit": "ratio"
+        },
+        {
+          "metric": "random_100_net_median",
+          "label": "随机100股扣费后中位盈亏",
+          "value": -14.898237934278995,
+          "unit": "CNY"
+        },
+        {
+          "metric": "random_mean_return",
+          "label": "随机单股算术平均收益",
+          "value": 0.11010182098730159,
+          "unit": "ratio"
+        },
+        {
+          "metric": "random_winsorized_mean_return",
+          "label": "随机单股1%/99%缩尾平均收益",
+          "value": 0.09966214439049434,
+          "unit": "ratio"
+        },
+        {
+          "metric": "random_mean_return_ci_low",
+          "label": "随机单股平均收益年份块Bootstrap 95%下限",
+          "value": 0.00320805838727966,
+          "unit": "ratio"
+        },
+        {
+          "metric": "random_mean_return_ci_high",
+          "label": "随机单股平均收益年份块Bootstrap 95%上限",
+          "value": 0.234699593794958,
+          "unit": "ratio"
+        },
+        {
+          "metric": "random_100_mean_net_pnl",
+          "label": "随机100股扣费后算术平均盈亏",
+          "value": 97.02802663570915,
+          "unit": "CNY"
+        },
+        {
+          "metric": "random_100_winsorized_mean_net_pnl",
+          "label": "随机100股扣费后缩尾平均盈亏",
+          "value": 79.47632744782308,
+          "unit": "CNY"
+        },
+        {
+          "metric": "random_100_mean_net_pnl_ci_low",
+          "label": "随机100股扣费后平均盈亏Bootstrap 95%下限",
+          "value": -82.4421539789017,
+          "unit": "CNY"
+        },
+        {
+          "metric": "random_100_mean_net_pnl_ci_high",
+          "label": "随机100股扣费后平均盈亏Bootstrap 95%上限",
+          "value": 289.8445334514,
+          "unit": "CNY"
+        },
+        {
+          "metric": "random_100_mean_initial_value",
+          "label": "随机100股平均初始金额",
+          "value": 1838.16,
+          "unit": "CNY"
+        },
+        {
+          "metric": "all_one_lot_latest_capital",
+          "label": "最近批次每只100股所需资金",
+          "value": 13423011.0,
+          "unit": "CNY"
+        }
+      ],
+      "source": {
+        "label": "核心概率与金额指标",
+        "files": [
+          "tmp/analyze_one_year_probability.py",
+          "tmp/market_data/one_year_probability_20260907/analysis_summary.json",
+          "tmp/market_data/one_year_probability_20260907/validation_results.json"
+        ],
+        "links": [
+          {
+            "label": "中证全指官方编制方案",
+            "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/20231208175438-000985_Index_Methodology_cn.pdf"
+          },
+          {
+            "label": "中证全指官方单张",
+            "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000985factsheet.pdf"
+          },
+          {
+            "label": "证券交易印花税公告",
+            "url": "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5211343/content.html"
+          }
+        ],
+        "filters": [
+          "市场组合截止2026-09-04；随机单股买入批次2010-04至2025-09"
+        ],
+        "metricDefinitions": [
+          {
+            "label": "历史一年胜率",
+            "definition": "在对应历史持有期样本中，持有期收益严格大于0的加权占比。不是未来概率保证。",
+            "componentIds": [
+              "report-executive-summary",
+              "report-key-metrics",
+              "report-experiment-comparison",
+              "report-risk"
+            ]
+          },
+          {
+            "label": "随机单股平均收益",
+            "definition": "先令186个月份等权，再令每个月买入日可交易的沪深A股等权；收益使用后复权价格。",
+            "componentIds": [
+              "report-executive-summary",
+              "report-key-metrics",
+              "report-experiment-comparison",
+              "report-risk",
+              "report-random-distribution",
+              "report-survivorship"
+            ]
+          },
+          {
+            "label": "100股净盈亏",
+            "definition": "未复权买入价乘100股，并扣除佣金万三且每笔最低5元、卖出印花税0.05%、双边过户费各0.001%的情景值。",
+            "componentIds": [
+              "report-key-metrics",
+              "report-risk",
+              "report-methods"
+            ]
+          }
+        ],
+        "evidenceFlow": [
+          {
+            "title": "数据准备",
+            "detail": "下载公开日线与证券清单；保留原始分片、回执和数据截止日期。"
+          },
+          {
+            "title": "计算",
+            "detail": "按自然年构造持有期；月份等权、月内可交易股票等权；金额按100股换算。"
+          },
+          {
+            "title": "验证",
+            "detail": "独立复核权重归一、日期键覆盖、核心指标重算、收益分布总和与极端值。"
+          }
+        ]
+      },
+      "methods": [
+        {
+          "language": "python",
+          "code": "See tmp/analyze_one_year_probability.py and the companion executed notebook."
+        }
+      ]
+    },
+    "experiment_comparison": {
+      "rows": [
+        {
+          "experiment": "中证全指全收益指数",
+          "definition": "按调整市值加权、分红再投资",
+          "period": "2004-12-31至2026-09-04滚动一年",
+          "winRate": 0.6148487261146497,
+          "meanReturn": 0.19703899440974648,
+          "medianReturn": 0.057912993091292164,
+          "netWinRate": null
+        },
+        {
+          "experiment": "随机一只沪深A股",
+          "definition": "月份等权，月内当日可交易股票等权",
+          "period": "2010-04至2025-09月度买入批次",
+          "winRate": 0.49247456285890245,
+          "meanReturn": 0.11010182098730159,
+          "medianReturn": -0.005524861539296433,
+          "netWinRate": 0.47783609965658
+        },
+        {
+          "experiment": "每只股票各买100股",
+          "definition": "按股价自然形成价格加权组合",
+          "period": "2010-04至2025-09月度买入批次",
+          "winRate": 0.5806451612903226,
+          "meanReturn": 0.0982948051921481,
+          "medianReturn": 0.052904105468002054,
+          "netWinRate": 0.5698924731182796
+        },
+        {
+          "experiment": "全股票等金额组合",
+          "definition": "每只股票投入相同金额",
+          "period": "2010-04至2025-09月度买入批次",
+          "winRate": 0.6397849462365591,
+          "meanReturn": 0.11010182098730159,
+          "medianReturn": 0.0868507753294003,
+          "netWinRate": null
+        }
+      ],
+      "source": {
+        "label": "四种持有一年实验的可比结果",
+        "files": [
+          "tmp/analyze_one_year_probability.py",
+          "tmp/market_data/one_year_probability_20260907/analysis_summary.json",
+          "tmp/market_data/one_year_probability_20260907/validation_results.json"
+        ],
+        "links": [
+          {
+            "label": "中证全指全收益指数历史行情",
+            "url": "https://www.csindex.com.cn/csindex-home/perf/index-perf?indexCode=H00985&startDate=20041231&endDate=20260904"
+          }
+        ],
+        "filters": [
+          "收益口径与加权方式见每行定义；等金额组合未模拟逐笔最低佣金"
+        ],
+        "metricDefinitions": [
+          {
+            "label": "历史一年胜率",
+            "definition": "在对应历史持有期样本中，持有期收益严格大于0的加权占比。不是未来概率保证。",
+            "componentIds": [
+              "report-executive-summary",
+              "report-key-metrics",
+              "report-experiment-comparison",
+              "report-risk"
+            ]
+          },
+          {
+            "label": "随机单股平均收益",
+            "definition": "先令186个月份等权，再令每个月买入日可交易的沪深A股等权；收益使用后复权价格。",
+            "componentIds": [
+              "report-executive-summary",
+              "report-key-metrics",
+              "report-experiment-comparison",
+              "report-risk",
+              "report-random-distribution",
+              "report-survivorship"
+            ]
+          },
+          {
+            "label": "100股净盈亏",
+            "definition": "未复权买入价乘100股，并扣除佣金万三且每笔最低5元、卖出印花税0.05%、双边过户费各0.001%的情景值。",
+            "componentIds": [
+              "report-key-metrics",
+              "report-risk",
+              "report-methods"
+            ]
+          }
+        ],
+        "evidenceFlow": [
+          {
+            "title": "数据准备",
+            "detail": "下载公开日线与证券清单；保留原始分片、回执和数据截止日期。"
+          },
+          {
+            "title": "计算",
+            "detail": "按自然年构造持有期；月份等权、月内可交易股票等权；金额按100股换算。"
+          },
+          {
+            "title": "验证",
+            "detail": "独立复核权重归一、日期键覆盖、核心指标重算、收益分布总和与极端值。"
+          }
+        ]
+      }
+    },
+    "calendar_returns": {
+      "rows": [
+        {
+          "year": 2005,
+          "totalReturn": -0.0943099999999999
+        },
+        {
+          "year": 2006,
+          "totalReturn": 1.1538495511709304
+        },
+        {
+          "year": 2007,
+          "totalReturn": 1.7240403543307088
+        },
+        {
+          "year": 2008,
+          "totalReturn": -0.6376706863586409
+        },
+        {
+          "year": 2009,
+          "totalReturn": 1.0809562886940625
+        },
+        {
+          "year": 2010,
+          "totalReturn": -0.0299082261973399
+        },
+        {
+          "year": 2011,
+          "totalReturn": -0.2731735430023979
+        },
+        {
+          "year": 2012,
+          "totalReturn": 0.0623858407079644
+        },
+        {
+          "year": 2013,
+          "totalReturn": 0.0709640015460275
+        },
+        {
+          "year": 2014,
+          "totalReturn": 0.4841174530679293
+        },
+        {
+          "year": 2015,
+          "totalReturn": 0.337822937018372
+        },
+        {
+          "year": 2016,
+          "totalReturn": -0.1331146903925074
+        },
+        {
+          "year": 2017,
+          "totalReturn": 0.0367551895421056
+        },
+        {
+          "year": 2018,
+          "totalReturn": -0.2878938981313267
+        },
+        {
+          "year": 2019,
+          "totalReturn": 0.3340906920773583
+        },
+        {
+          "year": 2020,
+          "totalReturn": 0.2687486694611043
+        },
+        {
+          "year": 2021,
+          "totalReturn": 0.0770180998682252
+        },
+        {
+          "year": 2022,
+          "totalReturn": -0.1892526753481176
+        },
+        {
+          "year": 2023,
+          "totalReturn": -0.053432130178593
+        },
+        {
+          "year": 2024,
+          "totalReturn": 0.0997850922633214
+        },
+        {
+          "year": 2025,
+          "totalReturn": 0.2703293625661573
+        }
+      ],
+      "source": {
+        "label": "中证全指全收益指数完整日历年收益",
+        "files": [
+          "tmp/market_data/one_year_probability_20260907/csi_calendar_year_returns.csv"
+        ],
+        "links": [
+          {
+            "label": "中证全指全收益指数历史行情",
+            "url": "https://www.csindex.com.cn/csindex-home/perf/index-perf?indexCode=H00985&startDate=20041231&endDate=20260904"
+          }
+        ],
+        "filters": [
+          "完整日历年2005至2025；包含分红再投资"
+        ],
+        "metricDefinitions": [],
+        "evidenceFlow": [
+          {
+            "title": "数据准备",
+            "detail": "下载公开日线与证券清单；保留原始分片、回执和数据截止日期。"
+          },
+          {
+            "title": "计算",
+            "detail": "按自然年构造持有期；月份等权、月内可交易股票等权；金额按100股换算。"
+          },
+          {
+            "title": "验证",
+            "detail": "独立复核权重归一、日期键覆盖、核心指标重算、收益分布总和与极端值。"
+          }
+        ]
+      }
+    },
+    "random_distribution": {
+      "rows": [
+        {
+          "bucket": "≤-80%",
+          "probability": 0.0016428383706413
+        },
+        {
+          "bucket": "-80%~-50%",
+          "probability": 0.0257991734724333
+        },
+        {
+          "bucket": "-50%~-30%",
+          "probability": 0.1240187743622316
+        },
+        {
+          "bucket": "-30%~-10%",
+          "probability": 0.2299054593887
+        },
+        {
+          "bucket": "-10%~0%",
+          "probability": 0.1261591915470913
+        },
+        {
+          "bucket": "0%~10%",
+          "probability": 0.1101741265176222
+        },
+        {
+          "bucket": "10%~30%",
+          "probability": 0.1520163946307293
+        },
+        {
+          "bucket": "30%~50%",
+          "probability": 0.0864403651946384
+        },
+        {
+          "bucket": "50%~100%",
+          "probability": 0.0906071404510723
+        },
+        {
+          "bucket": "≥100%",
+          "probability": 0.05323653606484
+        }
+      ],
+      "source": {
+        "label": "随机沪深A股一年收益分布",
+        "files": [
+          "tmp/market_data/one_year_probability_20260907/random_stock_return_distribution.csv"
+        ],
+        "links": [
+          {
+            "label": "上交所股票清单",
+            "url": "https://www.sse.com.cn/assortment/stock/list/share/"
+          },
+          {
+            "label": "深交所股票清单",
+            "url": "https://www.szse.cn/market/product/stock/list/index.html"
+          }
+        ],
+        "filters": [
+          "186个月份等权；每月在当日可交易股票中等权；后复权收益"
+        ],
+        "metricDefinitions": [
+          {
+            "label": "历史一年胜率",
+            "definition": "在对应历史持有期样本中，持有期收益严格大于0的加权占比。不是未来概率保证。",
+            "componentIds": [
+              "report-executive-summary",
+              "report-key-metrics",
+              "report-experiment-comparison",
+              "report-risk"
+            ]
+          },
+          {
+            "label": "随机单股平均收益",
+            "definition": "先令186个月份等权，再令每个月买入日可交易的沪深A股等权；收益使用后复权价格。",
+            "componentIds": [
+              "report-executive-summary",
+              "report-key-metrics",
+              "report-experiment-comparison",
+              "report-risk",
+              "report-random-distribution",
+              "report-survivorship"
+            ]
+          },
+          {
+            "label": "100股净盈亏",
+            "definition": "未复权买入价乘100股，并扣除佣金万三且每笔最低5元、卖出印花税0.05%、双边过户费各0.001%的情景值。",
+            "componentIds": [
+              "report-key-metrics",
+              "report-risk",
+              "report-methods"
+            ]
+          }
+        ],
+        "evidenceFlow": [
+          {
+            "title": "数据准备",
+            "detail": "下载公开日线与证券清单；保留原始分片、回执和数据截止日期。"
+          },
+          {
+            "title": "计算",
+            "detail": "按自然年构造持有期；月份等权、月内可交易股票等权；金额按100股换算。"
+          },
+          {
+            "title": "验证",
+            "detail": "独立复核权重归一、日期键覆盖、核心指标重算、收益分布总和与极端值。"
+          }
+        ]
+      }
+    },
+    "annual_regimes": {
+      "rows": [
+        {
+          "entryYear": 2010,
+          "monthlyCohorts": 9,
+          "randomStockMeanReturn": 0.0469155847634733,
+          "randomStockWinRate": 0.4540734392196314,
+          "allStocksMeanReturn": 0.0090272920117836
+        },
+        {
+          "entryYear": 2011,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": -0.2362624049983548,
+          "randomStockWinRate": 0.1188648873544282,
+          "allStocksMeanReturn": -0.228899260648463
+        },
+        {
+          "entryYear": 2012,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": 0.1444802377832271,
+          "randomStockWinRate": 0.5527455813428893,
+          "allStocksMeanReturn": 0.1642540501548963
+        },
+        {
+          "entryYear": 2013,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": 0.3153302304429679,
+          "randomStockWinRate": 0.7389049682898529,
+          "allStocksMeanReturn": 0.2925648868465055
+        },
+        {
+          "entryYear": 2014,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": 0.7866833398509372,
+          "randomStockWinRate": 0.907344376506123,
+          "allStocksMeanReturn": 0.7136845677966946
+        },
+        {
+          "entryYear": 2015,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": 0.0704849466489644,
+          "randomStockWinRate": 0.4825054925200531,
+          "allStocksMeanReturn": 0.0684625109098322
+        },
+        {
+          "entryYear": 2016,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": 0.0108611699344125,
+          "randomStockWinRate": 0.4462454672918425,
+          "allStocksMeanReturn": -0.0413313030132094
+        },
+        {
+          "entryYear": 2017,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": -0.2182721335046273,
+          "randomStockWinRate": 0.1591553918409519,
+          "allStocksMeanReturn": -0.2070346039230942
+        },
+        {
+          "entryYear": 2018,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": -0.0221811972003869,
+          "randomStockWinRate": 0.3940002454311702,
+          "allStocksMeanReturn": -0.0159340420118815
+        },
+        {
+          "entryYear": 2019,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": 0.1869310877985077,
+          "randomStockWinRate": 0.5754340415894995,
+          "allStocksMeanReturn": 0.3107946401691641
+        },
+        {
+          "entryYear": 2020,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": 0.1447420450726876,
+          "randomStockWinRate": 0.490134684249317,
+          "allStocksMeanReturn": 0.1855638833349014
+        },
+        {
+          "entryYear": 2021,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": 0.0427950690210851,
+          "randomStockWinRate": 0.4500765447512462,
+          "allStocksMeanReturn": -0.0754676649782237
+        },
+        {
+          "entryYear": 2022,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": 0.0492052278685009,
+          "randomStockWinRate": 0.5060894604236542,
+          "allStocksMeanReturn": -0.0301280209215947
+        },
+        {
+          "entryYear": 2023,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": -0.1220859815690898,
+          "randomStockWinRate": 0.257492794679327,
+          "allStocksMeanReturn": -0.1770384191471284
+        },
+        {
+          "entryYear": 2024,
+          "monthlyCohorts": 12,
+          "randomStockMeanReturn": 0.2902019742188521,
+          "randomStockWinRate": 0.7353290698902512,
+          "allStocksMeanReturn": 0.2758234975275295
+        },
+        {
+          "entryYear": 2025,
+          "monthlyCohorts": 9,
+          "randomStockMeanReturn": 0.3046372338171809,
+          "randomStockWinRate": 0.6379701849835435,
+          "allStocksMeanReturn": 0.3753123858313721
+        }
+      ],
+      "source": {
+        "label": "随机单股按买入年份分组",
+        "files": [
+          "tmp/market_data/one_year_probability_20260907/random_stock_annual_regime_summary.csv"
+        ],
+        "links": [],
+        "filters": [
+          "2010和2025为非完整12个月买入批次"
+        ],
+        "metricDefinitions": [],
+        "evidenceFlow": [
+          {
+            "title": "数据准备",
+            "detail": "下载公开日线与证券清单；保留原始分片、回执和数据截止日期。"
+          },
+          {
+            "title": "计算",
+            "detail": "按自然年构造持有期；月份等权、月内可交易股票等权；金额按100股换算。"
+          },
+          {
+            "title": "验证",
+            "detail": "独立复核权重归一、日期键覆盖、核心指标重算、收益分布总和与极端值。"
+          }
+        ]
+      }
+    },
+    "survivorship_sensitivity": {
+      "rows": [
+        {
+          "scope": "仅2026年仍上市的股票",
+          "winRate": 0.49599797398548573,
+          "meanReturn": 0.11360682757543963,
+          "medianReturn": -0.0026200874887968295
+        },
+        {
+          "scope": "加入可识别历史退市股票",
+          "winRate": 0.49247456285890245,
+          "meanReturn": 0.11010182098730159,
+          "medianReturn": -0.005524861539296433
+        }
+      ],
+      "source": {
+        "label": "幸存者偏差敏感性",
+        "files": [
+          "tmp/analyze_one_year_probability.py",
+          "tmp/market_data/one_year_probability_20260907/analysis_summary.json",
+          "tmp/market_data/one_year_probability_20260907/validation_results.json"
+        ],
+        "links": [],
+        "filters": [
+          "退市样本取自Baostock证券主表；对2340个无法正常满一年的观察使用最后交易价代理"
+        ],
+        "metricDefinitions": [
+          {
+            "label": "历史一年胜率",
+            "definition": "在对应历史持有期样本中，持有期收益严格大于0的加权占比。不是未来概率保证。",
+            "componentIds": [
+              "report-executive-summary",
+              "report-key-metrics",
+              "report-experiment-comparison",
+              "report-risk"
+            ]
+          },
+          {
+            "label": "随机单股平均收益",
+            "definition": "先令186个月份等权，再令每个月买入日可交易的沪深A股等权；收益使用后复权价格。",
+            "componentIds": [
+              "report-executive-summary",
+              "report-key-metrics",
+              "report-experiment-comparison",
+              "report-risk",
+              "report-random-distribution",
+              "report-survivorship"
+            ]
+          },
+          {
+            "label": "100股净盈亏",
+            "definition": "未复权买入价乘100股，并扣除佣金万三且每笔最低5元、卖出印花税0.05%、双边过户费各0.001%的情景值。",
+            "componentIds": [
+              "report-key-metrics",
+              "report-risk",
+              "report-methods"
+            ]
+          }
+        ],
+        "evidenceFlow": [
+          {
+            "title": "数据准备",
+            "detail": "下载公开日线与证券清单；保留原始分片、回执和数据截止日期。"
+          },
+          {
+            "title": "计算",
+            "detail": "按自然年构造持有期；月份等权、月内可交易股票等权；金额按100股换算。"
+          },
+          {
+            "title": "验证",
+            "detail": "独立复核权重归一、日期键覆盖、核心指标重算、收益分布总和与极端值。"
+          }
+        ]
+      }
+    },
+    "risk_metrics": {
+      "rows": [
+        {
+          "measure": "随机单股亏损至少30%",
+          "value": 0.15146078620530634,
+          "unit": "ratio"
+        },
+        {
+          "measure": "随机单股亏损至少50%",
+          "value": 0.02744201184307473,
+          "unit": "ratio"
+        },
+        {
+          "measure": "随机单股上涨至少50%",
+          "value": 0.1438770708274769,
+          "unit": "ratio"
+        },
+        {
+          "measure": "随机单股翻倍",
+          "value": 0.05326611436525049,
+          "unit": "ratio"
+        },
+        {
+          "measure": "全市场组合滚动一年亏损至少20%",
+          "value": 0.10788216560509555,
+          "unit": "ratio"
+        },
+        {
+          "measure": "全市场组合滚动一年亏损至少30%",
+          "value": 0.04219745222929936,
+          "unit": "ratio"
+        }
+      ],
+      "source": {
+        "label": "尾部风险频率",
+        "files": [
+          "tmp/analyze_one_year_probability.py",
+          "tmp/market_data/one_year_probability_20260907/analysis_summary.json",
+          "tmp/market_data/one_year_probability_20260907/validation_results.json"
+        ],
+        "links": [],
+        "filters": [
+          "历史频率，不是未来风险上限"
+        ],
+        "metricDefinitions": [
+          {
+            "label": "历史一年胜率",
+            "definition": "在对应历史持有期样本中，持有期收益严格大于0的加权占比。不是未来概率保证。",
+            "componentIds": [
+              "report-executive-summary",
+              "report-key-metrics",
+              "report-experiment-comparison",
+              "report-risk"
+            ]
+          },
+          {
+            "label": "随机单股平均收益",
+            "definition": "先令186个月份等权，再令每个月买入日可交易的沪深A股等权；收益使用后复权价格。",
+            "componentIds": [
+              "report-executive-summary",
+              "report-key-metrics",
+              "report-experiment-comparison",
+              "report-risk",
+              "report-random-distribution",
+              "report-survivorship"
+            ]
+          },
+          {
+            "label": "100股净盈亏",
+            "definition": "未复权买入价乘100股，并扣除佣金万三且每笔最低5元、卖出印花税0.05%、双边过户费各0.001%的情景值。",
+            "componentIds": [
+              "report-key-metrics",
+              "report-risk",
+              "report-methods"
+            ]
+          }
+        ],
+        "evidenceFlow": [
+          {
+            "title": "数据准备",
+            "detail": "下载公开日线与证券清单；保留原始分片、回执和数据截止日期。"
+          },
+          {
+            "title": "计算",
+            "detail": "按自然年构造持有期；月份等权、月内可交易股票等权；金额按100股换算。"
+          },
+          {
+            "title": "验证",
+            "detail": "独立复核权重归一、日期键覆盖、核心指标重算、收益分布总和与极端值。"
+          }
+        ]
+      }
+    },
+    "data_quality": {
+      "rows": [
+        {
+          "check": "当前沪深A股代码覆盖",
+          "value": 5212,
+          "detail": "5212/5212个官方当前代码均有行情"
+        },
+        {
+          "check": "历史退市证券下载",
+          "value": 269,
+          "detail": "269只尝试，266只有非空日线，下载失败0"
+        },
+        {
+          "check": "后复权/未复权日期键连接覆盖率",
+          "value": 0.9984857667802365,
+          "detail": "按证券代码+交易日一对一连接"
+        },
+        {
+          "check": "证券-月份观察数",
+          "value": 618527,
+          "detail": "186个月度买入批次"
+        },
+        {
+          "check": "独立复核状态",
+          "value": 1,
+          "detail": "pass"
+        },
+        {
+          "check": "退市终值代理观察数",
+          "value": 2340,
+          "detail": "以最后可交易价近似，真实现金/换股/三板回收未逐只还原"
+        }
+      ],
+      "source": {
+        "label": "数据质量与复核",
+        "files": [
+          "tmp/analyze_one_year_probability.py",
+          "tmp/market_data/one_year_probability_20260907/analysis_summary.json",
+          "tmp/market_data/one_year_probability_20260907/validation_results.json"
+        ],
+        "links": [],
+        "filters": [
+          "后复权替代前复权，以消除长期前复权价格接近零导致的舍入失真"
+        ],
+        "metricDefinitions": [],
+        "evidenceFlow": [
+          {
+            "title": "数据准备",
+            "detail": "下载公开日线与证券清单；保留原始分片、回执和数据截止日期。"
+          },
+          {
+            "title": "计算",
+            "detail": "按自然年构造持有期；月份等权、月内可交易股票等权；金额按100股换算。"
+          },
+          {
+            "title": "验证",
+            "detail": "独立复核权重归一、日期键覆盖、核心指标重算、收益分布总和与极端值。"
+          }
+        ]
+      }
+    }
+  },
+  "id": "report:ad40c081-4a31-4579-8a1e-1a3a4ae90699"
+}
+
